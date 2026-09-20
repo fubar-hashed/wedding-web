@@ -1,0 +1,21 @@
+---
+import { siteConfig } from '../config/site';
+
+interface Props {
+  extended?: boolean;
+}
+
+const { extended = false } = Astro.props;
+---
+
+<section class="hero section-shell" aria-labelledby="hero-title">
+  <p class="eyebrow">A wedding celebration</p>
+  <h1 id="hero-title">{siteConfig.couple}</h1>
+  <p class="hero-date">{siteConfig.dates} · {siteConfig.location}</p>
+  <div class="hero-rule" aria-hidden="true"></div>
+  <p class="hero-copy">
+    With joyful hearts, we invite you to be part of our celebrations.
+    {extended ? ' We cannot wait to celebrate every beautiful moment with you.' : ''}
+  </p>
+  <a class="button button-primary" href="#events">View the celebration</a>
+</section>

@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../config/site';
+
+interface Props {
+  view: 'public' | 'extended';
+  title?: string;
+}
+
+const { view, title = `${siteConfig.couple} · Wedding Invitation` } = Astro.props;
+const description = `Join ${siteConfig.couple} in ${siteConfig.location} on ${siteConfig.dates}.`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+  </head>
+  <body data-view={view}>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section class="rsvp-section section-shell" id="rsvp" aria-labelledby="rsvp-title">
+  <p class="eyebrow">A little note from us</p>
+  <h2 id="rsvp-title">Your presence is our gift.</h2>
+  <p>
+    Please let us know if you will be joining us so we can look forward to celebrating with you.
+  </p>
+  <a class="button button-primary" href={siteConfig.rsvpUrl} target="_blank" rel="noreferrer">
+    {siteConfig.rsvpLabel}
+  </a>
+  <p class="form-note">The RSVP form link will be updated here shortly.</p>
+</section>

@@ -1,0 +1,30 @@
+---
+import WeddingLayout from '../layouts/WeddingLayout.astro';
+import Hero from '../components/Hero.astro';
+import EventCard from '../components/EventCard.astro';
+import InfoSections from '../components/InfoSections.astro';
+import RsvpSection from '../components/RsvpSection.astro';
+import UpdatesBoard from '../components/UpdatesBoard.astro';
+import { weddingEvents } from '../config/events';
+import { linkViews } from '../config/links';
+
+const events = weddingEvents.filter((event) => linkViews.public.eventIds.includes(event.id));
+---
+
+<WeddingLayout view="public">
+  <Hero />
+  <section class="section-shell" id="events" aria-labelledby="events-title">
+    <div class="section-heading">
+      <p class="eyebrow">The celebration</p>
+      <h2 id="events-title">Join us for these moments</h2>
+    </div>
+    <div class="event-list">
+      {events.map((event, index) => <EventCard event={event} index={index} />)}
+    </div>
+  </section>
+  <RsvpSection />
+  <InfoSections>
+    <UpdatesBoard slot="updates" />
+  </InfoSections>
+  <footer class="site-footer section-shell">With love, Dewanshi &amp; Aayush</footer>
+</WeddingLayout>

@@ -1,0 +1,44 @@
+---
+---
+
+<section class="section-shell updates-section" aria-labelledby="updates-title">
+  <div class="section-heading">
+    <p class="eyebrow">Keep in touch</p>
+    <h2 id="updates-title">Updates</h2>
+  </div>
+  <div class="updates-board" data-updates-board>
+    <p class="muted">There are no updates yet.</p>
+  </div>
+</section>
+
+<script>
+  const board = document.querySelector<HTMLElement>('[data-updates-board]');
+  const updatesUrl = `${import.meta.env.BASE_URL}content/updates.txt?v=${Date.now()}`;
+
+  if (board) {
+    fetch(updatesUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error('Could not load updates');
+        return response.text();
+      })
+      .then((text) => {
+        const lines = text
+          .split('\n')
+          .map((line) => line.trim())
+          .filter(Boolean);
+
+        if (lines.length === 0) return;
+        board.replaceChildren(
+          ...lines.map((line) => {
+            const item = document.createElement('p');
+            item.className = 'update-item';
+            item.textContent = line;
+            return item;
+          }),
+        );
+      })
+      .catch(() => {
+        // The empty state remains visible if the updates file is unavailable.
+      });
+  }
+</script>
