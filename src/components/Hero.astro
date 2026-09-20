@@ -6,9 +6,14 @@ interface Props {
 }
 
 const { extended = false } = Astro.props;
+const assetBase = `${import.meta.env.BASE_URL}/assets/themes`.replace(/\/+/g, '/');
 ---
 
-<section class="hero section-shell" aria-labelledby="hero-title">
+<section
+  class="hero section-shell"
+  aria-labelledby="hero-title"
+  style={`--hero-art-festive: url('${assetBase}/contemporary-festive.webp'); --hero-art-earthy: url('${assetBase}/earthy-handcrafted.webp'); --hero-art-editorial: url('${assetBase}/modern-editorial.webp'); --hero-art-pastel: url('${assetBase}/pastel-garden.webp');`}
+>
   <div class="hero-flourish" aria-hidden="true"><span></span><span></span><span></span></div>
   <p class="eyebrow">A wedding celebration</p>
   <h1 id="hero-title">{siteConfig.couple}</h1>
