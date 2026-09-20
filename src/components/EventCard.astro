@@ -12,9 +12,11 @@ const { event, index } = Astro.props;
 <article class="event-card" id={event.id}>
   <div class="event-number" aria-hidden="true">0{index + 1}</div>
   <div>
-    <p class="eyebrow">{event.date}</p>
+    <div class="event-meta">
+      <p class="eyebrow">{event.date}</p>
+      <p class="event-time">{event.time}</p>
+    </div>
     <h3>{event.title}</h3>
-    <p class="event-time">{event.time}</p>
     <p>{event.description}</p>
     <p class="event-detail"><span>Attire</span>{event.attire}</p>
   </div>

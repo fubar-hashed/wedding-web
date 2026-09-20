@@ -9,6 +9,7 @@ const { extended = false } = Astro.props;
 ---
 
 <section class="hero section-shell" aria-labelledby="hero-title">
+  <div class="hero-flourish" aria-hidden="true"><span></span><span></span><span></span></div>
   <p class="eyebrow">A wedding celebration</p>
   <h1 id="hero-title">{siteConfig.couple}</h1>
   <p class="hero-date">{siteConfig.dates} · {siteConfig.location}</p>
@@ -17,5 +18,6 @@ const { extended = false } = Astro.props;
     With joyful hearts, we invite you to be part of our celebrations.
     {extended ? ' We cannot wait to celebrate every beautiful moment with you.' : ''}
   </p>
+  <p class="hero-signature">Two families · One beautiful beginning</p>
   <a class="button button-primary" href="#events">View the celebration</a>
 </section>
