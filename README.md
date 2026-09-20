@@ -29,6 +29,21 @@ Edit these files without changing components:
 
 The RSVP URL is intentionally a placeholder until the external form is ready.
 
+## Switching visual themes
+
+The active theme is controlled by `theme` in `src/config/site.ts`:
+
+```ts
+theme: 'contemporary-festive'
+```
+
+Available themes:
+
+- `contemporary-festive` — current direction with coral, marigold, peach, and warm ivory accents
+- `minimal` — preserved backup of the original restrained palette
+
+Changing this one value switches the theme without changing wedding content, event visibility, or RSVP behavior.
+
 ## Updating the live board
 
 Edit `public/content/updates.txt`, review locally, commit, and push. GitHub Pages will redeploy the site and the updates board will load the new text after deployment.
