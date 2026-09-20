@@ -2,6 +2,8 @@
 
 Static Astro website for Dewanshi and Aayush’s wedding celebrations in Jabalpur.
 
+The planned GitHub Pages URL is `https://fubar-hashed.github.io/wedding-web/`.
+
 ## Local development
 
 ```sh
