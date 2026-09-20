@@ -1,0 +1,36 @@
+---
+const themes = [
+  { value: 'contemporary-festive', label: 'Contemporary festive' },
+  { value: 'earthy-handcrafted', label: 'Earthy handcrafted' },
+  { value: 'modern-editorial', label: 'Modern editorial' },
+  { value: 'pastel-garden', label: 'Pastel garden' },
+  { value: 'minimal', label: 'Minimal backup' },
+];
+---
+
+<div class="theme-picker" data-theme-picker>
+  <label for="theme-select">Preview theme</label>
+  <select id="theme-select" data-theme-select>
+    {themes.map((theme) => <option value={theme.value}>{theme.label}</option>)}
+  </select>
+</div>
+
+<script>
+  const picker = document.querySelector<HTMLElement>('[data-theme-picker]');
+  const select = picker?.querySelector<HTMLSelectElement>('[data-theme-select]');
+  const storageKey = 'wedding-theme-preview';
+
+  if (select) {
+    const configuredTheme = document.body.dataset.theme || 'contemporary-festive';
+    const savedTheme = window.localStorage.getItem(storageKey);
+    const initialTheme = savedTheme || configuredTheme;
+
+    select.value = initialTheme;
+    document.body.dataset.theme = initialTheme;
+
+    select.addEventListener('change', () => {
+      document.body.dataset.theme = select.value;
+      window.localStorage.setItem(storageKey, select.value);
+    });
+  }
+</script>

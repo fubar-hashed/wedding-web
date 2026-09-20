@@ -519,6 +519,53 @@ h3 {
   text-align: center;
 }
 
+.theme-picker {
+  align-items: center;
+  background: color-mix(in srgb, var(--color-paper) 92%, transparent);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.45rem 0.65rem 0.45rem 0.85rem;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 10;
+}
+
+.theme-picker label {
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.theme-picker select {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-ink);
+  cursor: pointer;
+  font-size: 0.75rem;
+  max-width: 9rem;
+  padding: 0.35rem 1.8rem 0.35rem 0.65rem;
+}
+
+.theme-picker select:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+[data-theme='modern-editorial'] .theme-picker {
+  border-radius: 0;
+}
+
+[data-theme='earthy-handcrafted'] .theme-picker select,
+[data-theme='earthy-handcrafted'] .theme-picker {
+  border-radius: var(--radius-card);
+}
+
 @media (max-width: 42rem) {
   .section-shell {
     padding-bottom: var(--space-5);
@@ -535,6 +582,17 @@ h3 {
 
   [data-theme='modern-editorial'] .hero {
     min-height: 76vh;
+  }
+
+  .theme-picker {
+    left: 1rem;
+    right: 1rem;
+    top: 0.75rem;
+  }
+
+  .theme-picker select {
+    flex: 1;
+    max-width: none;
   }
 
   [data-theme='contemporary-festive'] .event-card {

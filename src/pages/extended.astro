@@ -5,6 +5,7 @@ import EventCard from '../components/EventCard.astro';
 import InfoSections from '../components/InfoSections.astro';
 import RsvpSection from '../components/RsvpSection.astro';
 import UpdatesBoard from '../components/UpdatesBoard.astro';
+import ThemePicker from '../components/ThemePicker.astro';
 import { weddingEvents } from '../config/events';
 import { linkViews } from '../config/links';
 
@@ -12,6 +13,7 @@ const events = weddingEvents.filter((event) => linkViews.extended.eventIds.inclu
 ---
 
 <WeddingLayout view="extended">
+  <ThemePicker />
   <Hero extended />
   <section class="section-shell" id="events" aria-labelledby="events-title">
     <div class="section-heading">

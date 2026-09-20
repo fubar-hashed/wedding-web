@@ -47,6 +47,8 @@ Available themes:
 
 Changing this one value switches the theme without changing wedding content, event visibility, or RSVP behavior.
 
+For visual review, the site also includes a **Preview theme** dropdown. It changes the theme instantly and remembers the choice in the browser. This preview control should be hidden or removed before the invitation is shared with guests.
+
 ## Updating the live board
 
 Edit `public/content/updates.txt`, review locally, commit, and push. GitHub Pages will redeploy the site and the updates board will load the new text after deployment.
