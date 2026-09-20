@@ -41,6 +41,9 @@ Available themes:
 
 - `contemporary-festive` — current direction with coral, marigold, peach, and warm ivory accents
 - `minimal` — preserved backup of the original restrained palette
+- `earthy-handcrafted` — terracotta, sand, olive, tactile surfaces, and artisanal warmth
+- `modern-editorial` — high contrast, sharp grids, and magazine-inspired typography
+- `pastel-garden` — blush, sage, ivory, rounded surfaces, and soft romantic styling
 
 Changing this one value switches the theme without changing wedding content, event visibility, or RSVP behavior.
 

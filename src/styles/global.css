@@ -1,7 +1,7 @@
 @import './tokens.css';
 @import './reset.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Karla:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
 body {
   background:
@@ -324,6 +324,135 @@ h3 {
   background: linear-gradient(135deg, rgb(247 217 183 / 42%), transparent 55%);
 }
 
+/* Earthy handcrafted: tactile, warm, and artisanal. */
+[data-theme='earthy-handcrafted'] {
+  --color-ink: #3d3028;
+  --color-muted: #77685a;
+  --color-paper: #f4eee4;
+  --color-card: #ebe0cf;
+  --color-line: #cdbba3;
+  --color-accent: #a45135;
+  --color-accent-dark: #743525;
+  --color-soft-accent: #d6b78e;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: Karla, ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 0.45rem;
+  --shadow-soft: 0 0.5rem 1rem rgb(76 54 36 / 7%);
+}
+
+[data-theme='earthy-handcrafted'] {
+  background-image: repeating-linear-gradient(0deg, rgb(112 78 48 / 2%) 0 1px, transparent 1px 5px);
+}
+
+[data-theme='earthy-handcrafted'] .hero {
+  min-height: 82vh;
+}
+
+[data-theme='earthy-handcrafted'] h1 {
+  font-size: clamp(3.5rem, 13vw, 8rem);
+  letter-spacing: -0.06em;
+}
+
+[data-theme='earthy-handcrafted'] .event-card,
+[data-theme='earthy-handcrafted'] .info-card {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: 0.35rem 0.35rem 0 var(--color-soft-accent);
+}
+
+/* Modern editorial: high contrast, sharp grid, and magazine-like typography. */
+[data-theme='modern-editorial'] {
+  --color-ink: #171717;
+  --color-muted: #66615d;
+  --color-paper: #f7f5f0;
+  --color-card: #eeece6;
+  --color-line: #1d1d1d;
+  --color-accent: #b44932;
+  --color-accent-dark: #171717;
+  --color-soft-accent: #d9d2c7;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 0;
+  --shadow-soft: none;
+}
+
+[data-theme='modern-editorial'] .hero {
+  align-items: flex-start;
+  border-bottom: 1px solid var(--color-line);
+  justify-content: flex-end;
+  min-height: 86vh;
+  text-align: left;
+}
+
+[data-theme='modern-editorial'] .hero h1 {
+  font-size: clamp(4rem, 14vw, 10rem);
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+  max-width: 58rem;
+}
+
+[data-theme='modern-editorial'] .hero-copy {
+  margin-top: var(--space-2);
+  max-width: 25rem;
+}
+
+[data-theme='modern-editorial'] .hero-rule {
+  margin-left: 0;
+}
+
+[data-theme='modern-editorial'] .section-heading {
+  border-bottom: 1px solid var(--color-line);
+  border-left: 0;
+  padding: 0 0 var(--space-2);
+}
+
+[data-theme='modern-editorial'] .event-card {
+  border-left: 0;
+  border-right: 0;
+  border-top: 1px solid var(--color-line);
+  box-shadow: none;
+}
+
+/* Pastel garden: soft, romantic, and light. */
+[data-theme='pastel-garden'] {
+  --color-ink: #493d42;
+  --color-muted: #87747b;
+  --color-paper: #fffafa;
+  --color-card: #fff0f0;
+  --color-line: #ead6d9;
+  --color-accent: #c57e91;
+  --color-accent-dark: #925c70;
+  --color-soft-accent: #cfe0d0;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 2rem;
+  --shadow-soft: 0 1.25rem 3rem rgb(159 112 128 / 10%);
+}
+
+[data-theme='pastel-garden'] .hero {
+  background: radial-gradient(circle at 50% 0%, rgb(255 226 229 / 65%), transparent 32rem);
+}
+
+[data-theme='pastel-garden'] h1 {
+  color: var(--color-accent-dark);
+  font-size: clamp(3.5rem, 13vw, 8rem);
+  letter-spacing: -0.06em;
+}
+
+[data-theme='pastel-garden'] .event-card,
+[data-theme='pastel-garden'] .info-card {
+  border-color: var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+[data-theme='pastel-garden'] .event-card:nth-child(odd) {
+  background: #fff0f0;
+}
+
+[data-theme='pastel-garden'] .event-card:nth-child(even) {
+  background: #f1f7ef;
+}
+
 .rsvp-section p:not(.eyebrow):not(.form-note) {
   margin: var(--space-2) auto 0;
   max-width: 34rem;
@@ -402,6 +531,10 @@ h3 {
 
   [data-theme='contemporary-festive'] h1 {
     font-size: clamp(3.5rem, 18vw, 6rem);
+  }
+
+  [data-theme='modern-editorial'] .hero {
+    min-height: 76vh;
   }
 
   [data-theme='contemporary-festive'] .event-card {

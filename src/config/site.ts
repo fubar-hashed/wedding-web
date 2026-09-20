@@ -1,5 +1,10 @@
 export const siteConfig = {
-  theme: 'contemporary-festive' as 'minimal' | 'contemporary-festive',
+  theme: 'contemporary-festive' as
+    | 'minimal'
+    | 'contemporary-festive'
+    | 'earthy-handcrafted'
+    | 'modern-editorial'
+    | 'pastel-garden',
   couple: 'Dewanshi & Aayush',
   location: 'Jabalpur, Madhya Pradesh',
   dates: '26–27 January 2027',
