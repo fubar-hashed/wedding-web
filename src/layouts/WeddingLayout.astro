@@ -9,6 +9,7 @@ interface Props {
 
 const { view, title = `${siteConfig.couple} · Wedding Invitation` } = Astro.props;
 const description = `Join ${siteConfig.couple} in ${siteConfig.location} on ${siteConfig.dates}.`;
+const assetBase = `${import.meta.env.BASE_URL}/assets/themes`.replace(/\/+/g, '/');
 ---
 
 <!doctype html>
@@ -22,7 +23,11 @@ const description = `Join ${siteConfig.couple} in ${siteConfig.location} on ${si
     <meta property="og:type" content="website" />
     <title>{title}</title>
   </head>
-  <body data-view={view} data-theme={siteConfig.theme}>
+  <body
+    data-view={view}
+    data-theme={siteConfig.theme}
+    style={`--hero-art-festive: url('${assetBase}/contemporary-festive.webp'); --hero-art-earthy: url('${assetBase}/earthy-handcrafted.webp'); --hero-art-editorial: url('${assetBase}/modern-editorial.webp'); --hero-art-pastel: url('${assetBase}/pastel-garden.webp');`}
+  >
     <main>
       <slot />
     </main>
