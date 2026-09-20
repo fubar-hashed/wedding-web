@@ -41,3 +41,7 @@ ASTRO_TELEMETRY_DISABLED=1 npm run build
 ```
 
 The GitHub Actions workflow in `.github/workflows/deploy.yml` deploys the generated `dist/` directory to GitHub Pages from `main`.
+
+### GitHub Pages configuration
+
+In the repository settings, open **Settings → Pages** and set **Source** to **GitHub Actions**. Do not select **Deploy from a branch**; that mode runs Jekyll against the Astro source files and produces YAML front-matter errors.
