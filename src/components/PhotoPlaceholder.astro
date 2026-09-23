@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  detail: string;
+  variant?: 'wide' | 'portrait';
+}
+
+const { label, detail, variant = 'portrait' } = Astro.props;
+---
+
+<div class:list={["photo-placeholder", `photo-placeholder-${variant}`]}>
+  <span class="photo-placeholder-mark" aria-hidden="true">+</span>
+  <p class="eyebrow">{label}</p>
+  <p>{detail}</p>
+</div>

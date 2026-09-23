@@ -1,0 +1,53 @@
+---
+import WeddingLayout from '../layouts/WeddingLayout.astro';
+import ThemePicker from '../components/ThemePicker.astro';
+import Hero from '../components/Hero.astro';
+import EventCard from '../components/EventCard.astro';
+import InfoSections from '../components/InfoSections.astro';
+import RsvpSection from '../components/RsvpSection.astro';
+import UpdatesBoard from '../components/UpdatesBoard.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import { weddingEvents } from '../config/events';
+import { linkViews } from '../config/links';
+
+const events = weddingEvents.filter((event) => linkViews.develop.eventIds.includes(event.id));
+---
+
+<WeddingLayout view="develop" title="Aayush and Dewanshi · Development Preview">
+  <ThemePicker />
+  <Hero extended />
+
+  <section class="section-shell photo-preview-section" aria-labelledby="photo-preview-title">
+    <div class="section-heading">
+      <p class="eyebrow">Development preview</p>
+      <h2 id="photo-preview-title">Photo placements</h2>
+    </div>
+    <p class="photo-preview-intro">
+      These modular slots show where the couple’s approved photos will go. Replace the placeholders with local assets when they are ready.
+    </p>
+    <div class="photo-preview-grid">
+      <PhotoPlaceholder
+        label="Couple photo"
+        detail="Wide image for the hero or story section"
+        variant="wide"
+      />
+      <PhotoPlaceholder label="Aayush" detail="Individual portrait placeholder" />
+      <PhotoPlaceholder label="Dewanshi" detail="Individual portrait placeholder" />
+    </div>
+  </section>
+
+  <section class="section-shell" id="events" aria-labelledby="events-title">
+    <div class="section-heading">
+      <p class="eyebrow">The celebration</p>
+      <h2 id="events-title">Every moment, together</h2>
+    </div>
+    <div class="event-list">
+      {events.map((event, index) => <EventCard event={event} index={index} />)}
+    </div>
+  </section>
+  <RsvpSection />
+  <InfoSections>
+    <UpdatesBoard slot="updates" />
+  </InfoSections>
+  <footer class="site-footer section-shell">Development preview · Aayush and Dewanshi</footer>
+</WeddingLayout>

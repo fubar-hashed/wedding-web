@@ -5,7 +5,7 @@ export const siteConfig = {
     | 'earthy-handcrafted'
     | 'modern-editorial'
     | 'pastel-garden',
-  couple: 'Dewanshi & Aayush',
+  couple: 'Aayush and Dewanshi',
   location: 'Jabalpur, Madhya Pradesh',
   dates: '26–27 January 2027',
   rsvpUrl: 'https://forms.google.com/',

@@ -1,4 +1,4 @@
-# Dewanshi & Aayush Wedding Website
+# Aayush and Dewanshi Wedding Website
 
 Static Astro website for Dewanshi and Aayush’s wedding celebrations in Jabalpur.
 
@@ -15,6 +15,7 @@ The two planned public views are:
 
 - `/` — Baraat + Reception
 - `/extended` — Sangeet + Engagement, Haldi, Baraat + Reception
+- `/develop` — development preview with couple and individual photo placeholders
 
 ## Editing wedding content
 
