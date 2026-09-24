@@ -11,28 +11,32 @@ import { weddingEvents } from '../config/events';
 import { linkViews } from '../config/links';
 
 const events = weddingEvents.filter((event) => linkViews.develop.eventIds.includes(event.id));
+const coupleAssetBase = `${import.meta.env.BASE_URL}/assets/couple`.replace(/\/+/g, '/');
 ---
 
 <WeddingLayout view="develop" title="Aayush and Dewanshi · Development Preview">
   <ThemePicker />
-  <Hero extended />
+  <Hero extended couplePhoto />
 
   <section class="section-shell photo-preview-section" aria-labelledby="photo-preview-title">
     <div class="section-heading">
       <p class="eyebrow">Development preview</p>
       <h2 id="photo-preview-title">Photo placements</h2>
     </div>
-    <p class="photo-preview-intro">
-      These modular slots show where the couple’s approved photos will go. Replace the placeholders with local assets when they are ready.
-    </p>
+    <p class="photo-preview-intro">Individual portraits from the couple’s photo collection.</p>
     <div class="photo-preview-grid">
       <PhotoPlaceholder
-        label="Couple photo"
-        detail="Wide image for the hero or story section"
-        variant="wide"
+        label="Aayush"
+        detail="Portrait"
+        imageSrc={`${coupleAssetBase}/aayush-portrait.webp`}
+        imageAlt="Portrait of Aayush"
       />
-      <PhotoPlaceholder label="Aayush" detail="Individual portrait placeholder" />
-      <PhotoPlaceholder label="Dewanshi" detail="Individual portrait placeholder" />
+      <PhotoPlaceholder
+        label="Dewanshi"
+        detail="Portrait"
+        imageSrc={`${coupleAssetBase}/dewanshi-portrait.webp`}
+        imageAlt="Portrait of Dewanshi"
+      />
     </div>
   </section>
 

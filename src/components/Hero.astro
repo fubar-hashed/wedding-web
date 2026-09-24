@@ -3,21 +3,31 @@ import { siteConfig } from '../config/site';
 
 interface Props {
   extended?: boolean;
+  couplePhoto?: boolean;
 }
 
-const { extended = false } = Astro.props;
+const { extended = false, couplePhoto = false } = Astro.props;
+const couplePhotoUrl = `${import.meta.env.BASE_URL}/assets/couple/aayush-and-dewanshi.webp`.replace(/\/+/g, '/');
 ---
 
-<section class="hero section-shell" aria-labelledby="hero-title">
-  <div class="hero-flourish" aria-hidden="true"><span></span><span></span><span></span></div>
-  <p class="eyebrow">A wedding celebration</p>
-  <h1 id="hero-title">{siteConfig.couple}</h1>
-  <p class="hero-date">{siteConfig.dates} · {siteConfig.location}</p>
-  <div class="hero-rule" aria-hidden="true"></div>
-  <p class="hero-copy">
-    With joyful hearts, we invite you to be part of our celebrations.
-    {extended ? ' We cannot wait to celebrate every beautiful moment with you.' : ''}
-  </p>
-  <p class="hero-signature">Two families · One beautiful beginning</p>
-  <a class="button button-primary" href="#events">View the celebration</a>
+<section class:list={["hero", "section-shell", { "hero-with-photo": couplePhoto }]} aria-labelledby="hero-title">
+  <div class="hero-copy-block">
+    <div class="hero-flourish" aria-hidden="true"><span></span><span></span><span></span></div>
+    <p class="eyebrow">A wedding celebration</p>
+    <h1 id="hero-title">{siteConfig.couple}</h1>
+    <p class="hero-date">{siteConfig.dates} · {siteConfig.location}</p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    <p class="hero-copy">
+      With joyful hearts, we invite you to be part of our celebrations.
+      {extended ? ' We cannot wait to celebrate every beautiful moment with you.' : ''}
+    </p>
+    <p class="hero-signature">Two families · One beautiful beginning</p>
+    <a class="button button-primary" href="#events">View the celebration</a>
+  </div>
+  {couplePhoto && (
+    <figure class="hero-photo-frame">
+      <img src={couplePhotoUrl} alt="Aayush and Dewanshi together" fetchpriority="high" />
+      <figcaption>Aayush and Dewanshi</figcaption>
+    </figure>
+  )}
 </section>

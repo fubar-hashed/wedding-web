@@ -3,13 +3,25 @@ interface Props {
   label: string;
   detail: string;
   variant?: 'wide' | 'portrait';
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-const { label, detail, variant = 'portrait' } = Astro.props;
+const { label, detail, variant = 'portrait', imageSrc, imageAlt = label } = Astro.props;
 ---
 
 <div class:list={["photo-placeholder", `photo-placeholder-${variant}`]}>
-  <span class="photo-placeholder-mark" aria-hidden="true">+</span>
-  <p class="eyebrow">{label}</p>
-  <p>{detail}</p>
+  {imageSrc ? (
+    <img class="portrait-image" src={imageSrc} alt={imageAlt} loading="lazy" />
+  ) : (
+    <>
+      <span class="photo-placeholder-mark" aria-hidden="true">+</span>
+      <p class="eyebrow">{label}</p>
+      <p>{detail}</p>
+    </>
+  )}
+  <div class="portrait-caption">
+    <p class="eyebrow">{label}</p>
+    {!imageSrc && <p>{detail}</p>}
+  </div>
 </div>

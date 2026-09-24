@@ -28,6 +28,7 @@ Edit these files without changing components:
 - `src/styles/tokens.css` — colors, typography, spacing, and visual direction
 - `public/assets/` — approved images and visual assets
 - `public/assets/themes/` — local theme hero artwork used by the visual themes
+- `public/assets/couple/` — optimized couple and individual portrait images used on `/develop`
 
 The RSVP URL is intentionally a placeholder until the external form is ready.
 
