@@ -6,11 +6,13 @@ interface Props {
 }
 
 const { includeUpdates = true } = Astro.props;
+const venueImage = `${import.meta.env.BASE_URL}/assets/venue/shawn-elizey-exterior.png`.replace(/\/+/g, '/');
 ---
 
 <section class="section-shell info-grid" aria-label="Wedding information">
   <article class="info-card">
     <p class="eyebrow">The venue</p>
+    <img class="venue-image" src={venueImage} alt="Exterior of Shawn Elizey in Jabalpur" loading="lazy" />
     <h2>{siteConfig.venue.name}</h2>
     <p>{siteConfig.venue.address}</p>
     <p class="muted">{siteConfig.venue.note}</p>

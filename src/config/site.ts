@@ -11,10 +11,10 @@ export const siteConfig = {
   rsvpUrl: 'https://form.typeform.com/to/qXJO9p9j',
   rsvpLabel: 'Please let us know',
   venue: {
-    name: 'Venue details coming soon',
+    name: 'Shawn Elizey',
     address: 'Jabalpur, Madhya Pradesh',
-    mapUrl: '#',
-    note: 'The venue address and arrival instructions will be updated here shortly.',
+    mapUrl: 'https://maps.app.goo.gl/6obBc4dp69bgPLvn9',
+    note: 'Use the map link below for directions to the venue.',
   },
   accommodation: {
     title: 'Accommodation details coming soon',

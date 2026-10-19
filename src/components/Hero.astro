@@ -5,13 +5,37 @@ interface Props {
   extended?: boolean;
   couplePhoto?: boolean;
   showDateLocation?: boolean;
+  mainCover?: boolean;
+  showCta?: boolean;
 }
 
-const { extended = false, couplePhoto = false, showDateLocation = true } = Astro.props;
+const {
+  extended = false,
+  couplePhoto = false,
+  showDateLocation = true,
+  mainCover = false,
+  showCta = true,
+} = Astro.props;
 const couplePhotoUrl = `${import.meta.env.BASE_URL}/assets/couple/aayush-and-dewanshi.webp`.replace(/\/+/g, '/');
 ---
 
-<section class:list={["hero", "section-shell", { "hero-with-photo": couplePhoto }]} aria-labelledby="hero-title">
+<section class:list={["hero", "section-shell", { "hero-with-photo": couplePhoto, "hero-main-cover": mainCover }]} aria-labelledby="hero-title">
+  {mainCover && (
+    <div class="hanging-photo-gallery" role="group" aria-label="Photos of Aayush and Dewanshi">
+      <figure class="hanging-photo hanging-photo-placeholder" aria-label="Photo placeholder">
+        <div class="hanging-photo-placeholder-art" aria-hidden="true"><span>✿</span></div>
+        <figcaption>Photo coming soon</figcaption>
+      </figure>
+      <figure class="hanging-photo hanging-photo-couple">
+        <img src={couplePhotoUrl} alt="Aayush and Dewanshi together" fetchpriority="high" />
+        <figcaption>Aayush and Dewanshi</figcaption>
+      </figure>
+      <figure class="hanging-photo hanging-photo-placeholder" aria-label="Photo placeholder">
+        <div class="hanging-photo-placeholder-art" aria-hidden="true"><span>✿</span></div>
+        <figcaption>Photo coming soon</figcaption>
+      </figure>
+    </div>
+  )}
   <div class="hero-copy-block">
     <div class="hero-flourish" aria-hidden="true"><span></span><span></span><span></span></div>
     <p class="eyebrow">A wedding celebration</p>
@@ -19,11 +43,24 @@ const couplePhotoUrl = `${import.meta.env.BASE_URL}/assets/couple/aayush-and-dew
     {showDateLocation && <p class="hero-date">{siteConfig.dates} · {siteConfig.location}</p>}
     <div class="hero-rule" aria-hidden="true"></div>
     <p class="hero-copy">
-      With joyful hearts, we invite you to be part of our celebrations.
+      {mainCover
+        ? 'With joyful hearts, we invite you to celebrate the beginning of our married life and share a few unforgettable days with us.'
+        : 'With joyful hearts, we invite you to be part of our celebrations.'}
       {extended ? ' We cannot wait to celebrate every beautiful moment with you.' : ''}
     </p>
+    {mainCover && (
+      <>
+        <p class="hero-copy hero-copy-secondary">
+          Join us in Jabalpur for music, color, laughter, and time together with the people we love most. Your presence will make these memories even more special.
+        </p>
+        <div class="hero-details" aria-label="Celebration dates and location">
+          <span>{siteConfig.dates}</span>
+          <span>{siteConfig.location}</span>
+        </div>
+      </>
+    )}
     <p class="hero-signature">Two families · One beautiful beginning</p>
-    <a class="button button-primary" href="#events">View the celebration</a>
+    {showCta && <a class="button button-primary" href="#events">View the celebration</a>}
   </div>
   {couplePhoto && (
     <figure class="hero-photo-frame">
