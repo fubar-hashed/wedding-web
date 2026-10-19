@@ -1,0 +1,161 @@
+---
+const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/g, '/');
+---
+
+<section class="celebration-section section-shell" id="celebrations" aria-labelledby="celebrations-title">
+  <div class="section-heading">
+    <p class="eyebrow">Three days, one story</p>
+    <h2 id="celebrations-title">The celebrations</h2>
+  </div>
+
+  <section class="save-date" aria-labelledby="save-date-title">
+    <div class="save-date-copy">
+      <p class="eyebrow">A little something to uncover</p>
+      <h3 id="save-date-title">Save the date</h3>
+      <p>Arrange the nine pieces in order to reveal the day we say “I do.”</p>
+      <div class="date-puzzle" data-date-puzzle>
+        <div class="puzzle-board" data-puzzle-board role="group" aria-label="Date puzzle pieces">
+          <button class="puzzle-piece" type="button" data-puzzle-piece="1" aria-pressed="false">1</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="2" aria-pressed="false">2</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="3" aria-pressed="false">3</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="4" aria-pressed="false">4</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="5" aria-pressed="false">5</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="6" aria-pressed="false">6</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="7" aria-pressed="false">7</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="8" aria-pressed="false">8</button>
+          <button class="puzzle-piece" type="button" data-puzzle-piece="9" aria-pressed="false">9</button>
+        </div>
+        <p class="puzzle-hint" data-puzzle-hint>Select one piece, then another to swap them. Put the numbers in order from 1 to 9.</p>
+        <p class="puzzle-date" data-puzzle-date aria-live="polite" hidden>
+          <span>Save the date</span>
+          <time datetime="2027-01-27">27 January 2027</time>
+        </p>
+      </div>
+    </div>
+    <figure class="save-date-reel">
+      <video controls playsinline preload="metadata" aria-label="Save the date announcement reel">
+        <source src={`${assetBase}/wedding-announcement-reel.mp4`} type="video/mp4" />
+        Your browser does not support video playback.
+      </video>
+      <figcaption>Our save-the-date announcement</figcaption>
+    </figure>
+  </section>
+
+  <ol class="celebration-timeline" aria-label="Wedding celebration timeline">
+    <li class="timeline-entry timeline-engagement" id="sangeet-engagement">
+      <span class="timeline-marker" aria-hidden="true">01</span>
+      <article class="timeline-card">
+        <div class="timeline-copy">
+          <p class="eyebrow">26 January 2027 · Evening</p>
+          <h3>Engagement</h3>
+          <p>An evening of music, celebration, and the beginning of this beautiful chapter.</p>
+          <p class="event-detail"><span>Attire</span>Festive attire</p>
+        </div>
+        <img
+          class="timeline-image"
+          src={`${assetBase}/engagement-save-the-date.png`}
+          alt="Illustrated engagement announcement for 26 January 2027"
+          loading="lazy"
+        />
+      </article>
+    </li>
+    <li class="timeline-entry timeline-haldi" id="haldi">
+      <span class="timeline-marker" aria-hidden="true">02</span>
+      <article class="timeline-card timeline-card-texture">
+        <div class="haldi-art" aria-hidden="true"><span>✿</span><span>✿</span><span>✿</span></div>
+        <div class="timeline-copy">
+          <p class="eyebrow">27 January 2027 · Afternoon</p>
+          <h3>Haldi</h3>
+          <p>A bright and joyful afternoon with the people closest to us.</p>
+          <p class="event-detail"><span>Attire</span>Comfortable festive attire</p>
+        </div>
+      </article>
+    </li>
+    <li class="timeline-entry timeline-wedding" id="baraat-reception">
+      <span class="timeline-marker" aria-hidden="true">03</span>
+      <article class="timeline-card">
+        <div class="timeline-copy">
+          <p class="eyebrow">27 January 2027 · Evening</p>
+          <h3>Wedding</h3>
+          <p>Join us for the baraat and reception as we celebrate together into the evening.</p>
+          <p class="event-detail"><span>Attire</span>Festive formal</p>
+        </div>
+        <figure class="timeline-video">
+          <video controls playsinline preload="metadata" aria-label="Traditional wedding invitation video">
+            <source src={`${assetBase}/traditional-wedding-invitation.mp4`} type="video/mp4" />
+            Your browser does not support video playback.
+          </video>
+          <figcaption>Our wedding invitation</figcaption>
+        </figure>
+      </article>
+    </li>
+  </ol>
+</section>
+
+<script>
+  const boards = document.querySelectorAll<HTMLElement>('[data-puzzle-board]');
+
+  boards.forEach((board) => {
+    const puzzle = board.closest<HTMLElement>('[data-date-puzzle]');
+    const hint = puzzle?.querySelector<HTMLElement>('[data-puzzle-hint]');
+    const date = puzzle?.querySelector<HTMLElement>('[data-puzzle-date]');
+    const pieces = Array.from(board.querySelectorAll<HTMLButtonElement>('[data-puzzle-piece]'));
+    if (!puzzle || !date || pieces.length !== 9) return;
+
+    for (let index = pieces.length - 1; index > 0; index--) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [pieces[index], pieces[swapIndex]] = [pieces[swapIndex], pieces[index]];
+    }
+    if (pieces.every((piece, index) => Number(piece.dataset.puzzlePiece) === index + 1)) {
+      [pieces[0], pieces[1]] = [pieces[1], pieces[0]];
+    }
+    pieces.forEach((piece) => board.append(piece));
+
+    let selected: HTMLButtonElement | undefined;
+
+    const updatePositions = () => {
+      pieces.forEach((piece, index) => {
+        piece.setAttribute('aria-label', `Position ${index + 1}, piece ${piece.dataset.puzzlePiece}`);
+      });
+    };
+
+    const checkSolved = () => {
+      const solved = pieces.every((piece, index) => Number(piece.dataset.puzzlePiece) === index + 1);
+      if (solved) {
+        puzzle.classList.add('is-solved');
+        if (hint) hint.textContent = 'You solved it!';
+        pieces.forEach((piece) => { piece.disabled = true; });
+        date.hidden = false;
+      }
+    };
+
+    pieces.forEach((piece) => {
+      piece.addEventListener('click', () => {
+        if (!selected) {
+          selected = piece;
+          piece.classList.add('is-selected');
+          piece.setAttribute('aria-pressed', 'true');
+          return;
+        }
+        if (selected === piece) {
+          selected.classList.remove('is-selected');
+          selected.setAttribute('aria-pressed', 'false');
+          selected = undefined;
+          return;
+        }
+
+        const firstIndex = pieces.indexOf(selected);
+        const secondIndex = pieces.indexOf(piece);
+        [pieces[firstIndex], pieces[secondIndex]] = [pieces[secondIndex], pieces[firstIndex]];
+        pieces.forEach((item) => board.append(item));
+        selected.classList.remove('is-selected');
+        selected.setAttribute('aria-pressed', 'false');
+        selected = undefined;
+        updatePositions();
+        checkSolved();
+      });
+    });
+
+    updatePositions();
+  });
+</script>

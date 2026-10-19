@@ -11,10 +11,10 @@ npm install
 npm run dev
 ```
 
-The two planned public views are:
+The public pages are:
 
-- `/` — Baraat + Reception
-- `/extended` — Sangeet + Engagement, Haldi, Baraat + Reception
+- `/` — celebration timeline: engagement, Haldi, and wedding
+- `/extended` — extended wedding invitation with the full celebration timeline
 - `/develop` — development preview with couple and individual photo placeholders
 
 ## Editing wedding content
@@ -27,6 +27,7 @@ Edit these files without changing components:
 - `public/content/updates.txt` — one live-board update per line
 - `src/styles/tokens.css` — colors, typography, spacing, and visual direction
 - `public/assets/` — approved images and visual assets
+- `public/assets/invitations/` — engagement save-the-date artwork and wedding announcement/invitation videos
 - `public/assets/themes/` — local theme hero artwork used by the visual themes
 - `public/assets/couple/` — optimized couple and individual portrait images used on `/develop`
 
