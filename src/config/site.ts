@@ -8,7 +8,7 @@ export const siteConfig = {
   couple: 'Aayush and Dewanshi',
   location: 'Jabalpur, Madhya Pradesh',
   dates: '26–27 January 2027',
-  rsvpUrl: 'https://forms.google.com/',
+  rsvpUrl: 'https://form.typeform.com/to/qXJO9p9j',
   rsvpLabel: 'Please let us know',
   venue: {
     name: 'Venue details coming soon',

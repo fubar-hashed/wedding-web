@@ -487,14 +487,9 @@ h3 {
 .timeline-entry {
   box-sizing: border-box;
   margin: 0 0 4rem;
-  padding: 0 3.5rem 0 0;
+  padding: 0;
   position: relative;
-  width: 50%;
-}
-
-.timeline-entry:nth-child(even) {
-  margin-left: 50%;
-  padding: 0 0 0 3.5rem;
+  width: 100%;
 }
 
 .timeline-marker {
@@ -509,27 +504,27 @@ h3 {
   font-size: 1.1rem;
   height: 3rem;
   justify-content: center;
+  left: 50%;
   position: absolute;
-  right: -1.5rem;
   top: 1.5rem;
+  transform: translateX(-50%);
   width: 3rem;
   z-index: 1;
 }
 
-.timeline-entry:nth-child(even) .timeline-marker {
-  left: -1.5rem;
-  right: auto;
+.timeline-card {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.timeline-card {
+.timeline-copy {
+  align-self: center;
   background: var(--color-card);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-soft);
-  overflow: hidden;
-}
-
-.timeline-copy {
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -545,16 +540,24 @@ h3 {
   width: 100%;
 }
 
-.timeline-video {
-  padding: 0 1rem 1rem;
+.timeline-media {
+  margin: 0;
+  width: 100%;
 }
 
-.timeline-card-texture {
+.timeline-image-frame {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.timeline-copy-haldi {
   background:
     radial-gradient(circle at 100% 0, rgb(255 206 88 / 28%), transparent 13rem),
     linear-gradient(145deg, var(--color-card), #f6d9a7);
   min-height: 21rem;
-  position: relative;
 }
 
 .haldi-art {
@@ -563,7 +566,7 @@ h3 {
   font-size: 2.4rem;
   gap: 0.4rem;
   opacity: 0.8;
-  padding: 1rem 1.5rem 0;
+  padding-bottom: 0.75rem;
 }
 
 .haldi-art span:nth-child(2) {
@@ -1121,20 +1124,28 @@ h3 {
     left: 1.25rem;
   }
 
-  .timeline-entry,
-  .timeline-entry:nth-child(even) {
+  .timeline-entry {
     margin: 0 0 2.5rem;
     padding: 0 0 0 3.25rem;
     width: 100%;
   }
 
-  .timeline-marker,
-  .timeline-entry:nth-child(even) .timeline-marker {
+  .timeline-card {
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline-marker {
     height: 2.5rem;
     left: 0;
     right: auto;
     top: 1rem;
+    transform: none;
     width: 2.5rem;
+  }
+
+  .timeline-copy-haldi {
+    min-height: 0;
   }
 
   .photo-preview-grid {

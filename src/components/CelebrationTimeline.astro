@@ -32,34 +32,36 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
         <div class="timeline-copy">
           <p class="eyebrow">26 January 2027 · Evening</p>
           <h3>Engagement</h3>
-          <p>An evening of music, celebration, and the beginning of this beautiful chapter.</p>
+          <p>Join us for an evening of music, laughter, and family as we celebrate our engagement and the beginning of this beautiful chapter together.</p>
           <p class="event-detail"><span>Attire</span>Festive attire</p>
         </div>
-        <img
-          class="timeline-image"
-          src={`${assetBase}/engagement-save-the-date.png`}
-          alt="Illustrated engagement announcement for 26 January 2027"
-          loading="lazy"
-        />
+        <figure class="timeline-image-frame timeline-media">
+          <img
+            class="timeline-image"
+            src={`${assetBase}/engagement-save-the-date.png`}
+            alt="Illustrated engagement announcement for 26 January 2027"
+            loading="lazy"
+          />
+        </figure>
       </article>
     </li>
     <li class="timeline-entry timeline-haldi" id="haldi">
       <span class="timeline-marker" aria-hidden="true">02</span>
-      <article class="timeline-card timeline-card-texture">
-        <div class="haldi-art" aria-hidden="true"><span>✿</span><span>✿</span><span>✿</span></div>
-        <div class="timeline-copy">
-          <p class="eyebrow">27 January 2027 · Afternoon</p>
-          <h3>Haldi</h3>
-          <p>A bright and joyful afternoon with the people closest to us.</p>
-          <p class="event-detail"><span>Attire</span>Comfortable festive attire</p>
-        </div>
-        <figure class="timeline-video">
-          <video controls playsinline preload="metadata" aria-label="Haldi invitation video">
+      <article class="timeline-card">
+        <figure class="timeline-video timeline-media">
+          <video controls playsinline muted preload="metadata" aria-label="Haldi invitation video">
             <source src={`${assetBase}/traditional-wedding-invitation.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
           <figcaption>Haldi invitation</figcaption>
         </figure>
+        <div class="timeline-copy timeline-copy-haldi">
+          <div class="haldi-art" aria-hidden="true"><span>✿</span><span>✿</span><span>✿</span></div>
+          <p class="eyebrow">27 January 2027 · Afternoon</p>
+          <h3>Haldi</h3>
+          <p>Spend a bright, joyful afternoon with us and the people closest to us, sharing the color, warmth, and blessings of the Haldi before the wedding.</p>
+          <p class="event-detail"><span>Attire</span>Comfortable festive attire</p>
+        </div>
       </article>
     </li>
     <li class="timeline-entry timeline-wedding" id="baraat-reception">
@@ -68,11 +70,11 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
         <div class="timeline-copy">
           <p class="eyebrow">27 January 2027 · Evening</p>
           <h3>Wedding</h3>
-          <p>Join us for the baraat and reception as we celebrate together into the evening.</p>
+          <p>Join the baraat and stay for the reception as our families come together for an evening of celebration. We look forward to sharing the start of married life with you.</p>
           <p class="event-detail"><span>Attire</span>Festive formal</p>
         </div>
-        <figure class="timeline-video">
-          <video controls playsinline preload="metadata" aria-label="Wedding announcement reel">
+        <figure class="timeline-video timeline-media">
+          <video controls playsinline muted preload="metadata" aria-label="Wedding announcement reel">
             <source src={`${assetBase}/wedding-announcement-reel.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
@@ -161,4 +163,20 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
     resizeCover();
     new ResizeObserver(resizeCover).observe(card);
   });
+
+  const timelineVideos = document.querySelectorAll<HTMLVideoElement>('.celebration-timeline video');
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          void video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: [0, 0.5] });
+
+    timelineVideos.forEach((video) => videoObserver.observe(video));
+  }
 </script>
