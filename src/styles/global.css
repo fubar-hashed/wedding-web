@@ -144,7 +144,20 @@ a {
   margin: 0 auto clamp(2rem, 4vw, 3rem);
   max-width: 62rem;
   padding-top: 3.75rem;
+  position: relative;
   width: 100%;
+}
+
+.hanging-photo-gallery::before {
+  background: linear-gradient(180deg, #a98b69, #d1b795 55%, #9b795b);
+  border-radius: 50%;
+  content: '';
+  height: 0.22rem;
+  left: 0.25rem;
+  position: absolute;
+  right: 0.25rem;
+  top: 2.95rem;
+  transform: rotate(-0.6deg);
 }
 
 .hanging-photo {
@@ -157,17 +170,11 @@ a {
   position: relative;
   transform: rotate(-3deg);
   width: 100%;
+  z-index: 1;
 }
 
 .hanging-photo::before {
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-accent-dark) 70%, #b08b65), transparent);
-  content: '';
-  height: 3.8rem;
-  left: 50%;
-  position: absolute;
-  top: -3.8rem;
-  transform: translateX(-50%);
-  width: 0.2rem;
+  content: none;
 }
 
 .hanging-photo::after {
@@ -184,11 +191,16 @@ a {
   z-index: 1;
 }
 
-.hanging-photo img,
+.hanging-photo img {
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
 .hanging-photo-placeholder-art {
   aspect-ratio: 4 / 5;
   display: grid;
-  object-fit: cover;
   place-items: center;
   width: 100%;
 }
@@ -209,16 +221,6 @@ a {
     linear-gradient(145deg, var(--color-soft-accent), var(--color-card));
   color: var(--color-accent);
   font-size: clamp(2rem, 5vw, 3.75rem);
-}
-
-.hanging-photo figcaption {
-  color: var(--color-muted);
-  font-family: var(--font-display);
-  font-size: clamp(0.65rem, 1.6vw, 0.9rem);
-  line-height: 1.2;
-  min-height: 1.2rem;
-  padding: 0.45rem 0.1rem 0;
-  text-align: center;
 }
 
 .hero-photo-frame figcaption {
@@ -449,11 +451,6 @@ h3 {
   padding: clamp(1.5rem, 5vw, 4rem);
 }
 
-.save-date-copy h3 {
-  color: var(--color-accent-dark);
-  margin-bottom: 0.35rem;
-}
-
 .save-date-solo {
   grid-template-columns: 1fr;
 }
@@ -461,24 +458,31 @@ h3 {
 .save-date-copy {
   margin-inline: auto;
   max-width: 40rem;
+  text-align: center;
   width: 100%;
 }
 
 .scratch-card {
-  border: 1px solid color-mix(in srgb, var(--color-accent-dark) 35%, transparent);
-  border-radius: 0.75rem;
-  box-shadow: 0 0.5rem 1.25rem rgb(67 40 23 / 14%);
-  margin-top: 1.25rem;
-  min-height: 9rem;
+  aspect-ratio: 1 / 0.9;
+  background: linear-gradient(145deg, #f7e7f0, #e9e4f8 56%, #e5f1ec);
+  filter: drop-shadow(0 0.65rem 0.8rem rgb(94 72 95 / 20%));
+  margin: 1.25rem auto 0;
+  max-width: 23rem;
   overflow: hidden;
   position: relative;
+  width: 100%;
+  clip-path: polygon(
+    50% 95%, 8% 56%, 4% 50%, 2% 42%, 3% 34%, 7% 26%, 13% 19%, 21% 14%,
+    29% 13%, 37% 16%, 44% 22%, 50% 30%, 56% 22%, 63% 16%, 71% 13%, 79% 14%,
+    87% 19%, 93% 26%, 97% 34%, 98% 42%, 96% 50%, 92% 56%
+  );
 }
 
 .scratch-date {
   align-items: center;
   background:
-    radial-gradient(circle at 1rem 1rem, var(--color-soft-accent) 0 2px, transparent 3px),
-    var(--color-paper);
+    radial-gradient(circle at 1rem 1rem, rgb(210 184 217 / 60%) 0 2px, transparent 3px),
+    linear-gradient(145deg, #fff7fb, #f5f0fb 55%, #f0f8f4);
   display: flex;
   flex-direction: column;
   inset: 0;
@@ -496,7 +500,7 @@ h3 {
 }
 
 .scratch-date time {
-  color: var(--color-accent-dark);
+  color: #895b84;
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 600;
@@ -526,31 +530,30 @@ h3 {
   color: var(--color-muted);
   font-size: 0.8rem;
   margin-top: 0.35rem;
+  text-align: center;
 }
 
-.save-date-reel,
 .timeline-video {
+  justify-self: center;
   margin: 0;
+  max-width: 19rem;
+  width: 100%;
 }
 
-.save-date-reel video,
 .timeline-video video {
+  aspect-ratio: 9 / 16;
   background: #30221f;
   border: 0.4rem solid var(--color-paper);
   border-radius: 0.75rem;
   box-shadow: var(--shadow-soft);
   display: block;
-  max-height: 32rem;
+  height: auto;
   object-fit: contain;
   width: 100%;
 }
 
-.save-date-reel figcaption,
-.timeline-video figcaption {
-  color: var(--color-muted);
-  font-size: 0.8rem;
-  margin-top: 0.65rem;
-  text-align: center;
+.timeline-video-haldi video {
+  aspect-ratio: 396 / 558;
 }
 
 .celebration-timeline {
@@ -1220,25 +1223,18 @@ body[data-view='public'] .hero-main-cover .hero-signature {
     padding-top: 3rem;
   }
 
+  .hanging-photo-gallery::before {
+    top: 2.35rem;
+  }
+
   .hanging-photo {
     border-width: 0.35rem;
     border-bottom-width: 0.7rem;
     max-width: 9rem;
   }
 
-  .hanging-photo::before {
-    height: 3rem;
-    top: -3rem;
-  }
-
   .hanging-photo-couple {
     max-width: 11rem;
-  }
-
-  .hanging-photo figcaption {
-    font-size: 0.6rem;
-    min-height: 1rem;
-    padding-top: 0.35rem;
   }
 
   body[data-view='public'] .hero-main-cover h1 {
@@ -1314,12 +1310,6 @@ body[data-view='public'] .hero-main-cover .hero-signature {
 
   .save-date {
     grid-template-columns: 1fr;
-  }
-
-  .save-date-reel {
-    margin-inline: auto;
-    max-width: 24rem;
-    width: 100%;
   }
 
   .celebration-timeline::before {

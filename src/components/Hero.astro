@@ -24,15 +24,12 @@ const couplePhotoUrl = `${import.meta.env.BASE_URL}/assets/couple/aayush-and-dew
     <div class="hanging-photo-gallery" role="group" aria-label="Photos of Aayush and Dewanshi">
       <figure class="hanging-photo hanging-photo-placeholder" aria-label="Photo placeholder">
         <div class="hanging-photo-placeholder-art" aria-hidden="true"><span>✿</span></div>
-        <figcaption>Photo coming soon</figcaption>
       </figure>
       <figure class="hanging-photo hanging-photo-couple">
         <img src={couplePhotoUrl} alt="Aayush and Dewanshi together" fetchpriority="high" />
-        <figcaption>Aayush and Dewanshi</figcaption>
       </figure>
       <figure class="hanging-photo hanging-photo-placeholder" aria-label="Photo placeholder">
         <div class="hanging-photo-placeholder-art" aria-hidden="true"><span>✿</span></div>
-        <figcaption>Photo coming soon</figcaption>
       </figure>
     </div>
   )}
@@ -51,10 +48,9 @@ const couplePhotoUrl = `${import.meta.env.BASE_URL}/assets/couple/aayush-and-dew
     {mainCover && (
       <>
         <p class="hero-copy hero-copy-secondary">
-          Join us in Jabalpur for music, color, laughter, and time together with the people we love most. Your presence will make these memories even more special.
+          Come together for music, color, laughter, and time with the people we love most. Your presence will make these memories even more special.
         </p>
-        <div class="hero-details" aria-label="Celebration dates and location">
-          <span>{siteConfig.dates}</span>
+        <div class="hero-details" aria-label="Celebration location">
           <span>{siteConfig.location}</span>
         </div>
       </>

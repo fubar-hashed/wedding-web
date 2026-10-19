@@ -4,14 +4,13 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
 
 <section class="celebration-section section-shell" id="celebrations" aria-labelledby="celebrations-title">
   <div class="section-heading">
-    <p class="eyebrow">Three days, one story</p>
+      <p class="eyebrow">Two days, one story</p>
     <h2 id="celebrations-title">The celebrations</h2>
   </div>
 
-  <section class="save-date save-date-solo" aria-labelledby="save-date-title">
+  <section class="save-date save-date-solo" aria-label="Save the date">
     <div class="save-date-copy">
       <p class="eyebrow">A little something to uncover</p>
-      <h3 id="save-date-title">Save the date</h3>
       <p>Scratch the card to reveal the day we say “I do.”</p>
       <div class="scratch-card" data-scratch-card>
         <div class="scratch-date" aria-live="polite">
@@ -48,12 +47,11 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
     <li class="timeline-entry timeline-haldi" id="haldi">
       <span class="timeline-marker" aria-hidden="true">02</span>
       <article class="timeline-card">
-        <figure class="timeline-video timeline-media">
+        <figure class="timeline-video timeline-video-haldi timeline-media">
           <video controls playsinline muted preload="metadata" aria-label="Haldi invitation video">
             <source src={`${assetBase}/traditional-wedding-invitation.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
-          <figcaption>Haldi invitation</figcaption>
         </figure>
         <div class="timeline-copy timeline-copy-haldi">
           <div class="haldi-art" aria-hidden="true"><span>✿</span><span>✿</span><span>✿</span></div>
@@ -73,12 +71,11 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
           <p>Join the baraat and stay for the reception as our families come together for an evening of celebration. We look forward to sharing the start of married life with you.</p>
           <p class="event-detail"><span>Attire</span>Festive formal</p>
         </div>
-        <figure class="timeline-video timeline-media">
+        <figure class="timeline-video timeline-video-wedding timeline-media">
           <video controls playsinline muted preload="metadata" aria-label="Wedding announcement reel">
             <source src={`${assetBase}/wedding-announcement-reel.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
-          <figcaption>Wedding announcement</figcaption>
         </figure>
       </article>
     </li>
@@ -106,13 +103,13 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
       canvas.height = Math.round(bounds.height * ratio);
       brush.setTransform(ratio, 0, 0, ratio, 0, 0);
       const gradient = brush.createLinearGradient(0, 0, bounds.width, bounds.height);
-      gradient.addColorStop(0, '#f5d9a9');
-      gradient.addColorStop(0.5, '#e8bc78');
-      gradient.addColorStop(1, '#f2d19a');
+      gradient.addColorStop(0, '#f6dfea');
+      gradient.addColorStop(0.5, '#e5def2');
+      gradient.addColorStop(1, '#dceee8');
       brush.globalCompositeOperation = 'source-over';
       brush.fillStyle = gradient;
       brush.fillRect(0, 0, bounds.width, bounds.height);
-      brush.fillStyle = 'rgba(125, 61, 35, 0.78)';
+      brush.fillStyle = 'rgba(112, 76, 112, 0.78)';
       brush.font = '600 13px Manrope, sans-serif';
       brush.textAlign = 'center';
       brush.textBaseline = 'middle';
