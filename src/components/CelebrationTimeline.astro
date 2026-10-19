@@ -8,37 +8,21 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
     <h2 id="celebrations-title">The celebrations</h2>
   </div>
 
-  <section class="save-date" aria-labelledby="save-date-title">
+  <section class="save-date save-date-solo" aria-labelledby="save-date-title">
     <div class="save-date-copy">
       <p class="eyebrow">A little something to uncover</p>
       <h3 id="save-date-title">Save the date</h3>
-      <p>Arrange the nine pieces in order to reveal the day we say “I do.”</p>
-      <div class="date-puzzle" data-date-puzzle>
-        <div class="puzzle-board" data-puzzle-board role="group" aria-label="Date puzzle pieces">
-          <button class="puzzle-piece" type="button" data-puzzle-piece="1" aria-pressed="false">1</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="2" aria-pressed="false">2</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="3" aria-pressed="false">3</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="4" aria-pressed="false">4</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="5" aria-pressed="false">5</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="6" aria-pressed="false">6</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="7" aria-pressed="false">7</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="8" aria-pressed="false">8</button>
-          <button class="puzzle-piece" type="button" data-puzzle-piece="9" aria-pressed="false">9</button>
-        </div>
-        <p class="puzzle-hint" data-puzzle-hint>Select one piece, then another to swap them. Put the numbers in order from 1 to 9.</p>
-        <p class="puzzle-date" data-puzzle-date aria-live="polite" hidden>
+      <p>Scratch the card to reveal the day we say “I do.”</p>
+      <div class="scratch-card" data-scratch-card>
+        <div class="scratch-date" aria-live="polite">
           <span>Save the date</span>
           <time datetime="2027-01-27">27 January 2027</time>
-        </p>
+        </div>
+        <canvas class="scratch-cover" data-scratch-cover aria-hidden="true"></canvas>
       </div>
+      <button class="scratch-reveal button button-primary" data-scratch-reveal type="button">Reveal the date</button>
+      <p class="scratch-hint" data-scratch-hint>Use your finger or mouse to scratch the card.</p>
     </div>
-    <figure class="save-date-reel">
-      <video controls playsinline preload="metadata" aria-label="Save the date announcement reel">
-        <source src={`${assetBase}/wedding-announcement-reel.mp4`} type="video/mp4" />
-        Your browser does not support video playback.
-      </video>
-      <figcaption>Our save-the-date announcement</figcaption>
-    </figure>
   </section>
 
   <ol class="celebration-timeline" aria-label="Wedding celebration timeline">
@@ -69,6 +53,13 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
           <p>A bright and joyful afternoon with the people closest to us.</p>
           <p class="event-detail"><span>Attire</span>Comfortable festive attire</p>
         </div>
+        <figure class="timeline-video">
+          <video controls playsinline preload="metadata" aria-label="Haldi invitation video">
+            <source src={`${assetBase}/traditional-wedding-invitation.mp4`} type="video/mp4" />
+            Your browser does not support video playback.
+          </video>
+          <figcaption>Haldi invitation</figcaption>
+        </figure>
       </article>
     </li>
     <li class="timeline-entry timeline-wedding" id="baraat-reception">
@@ -81,11 +72,11 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
           <p class="event-detail"><span>Attire</span>Festive formal</p>
         </div>
         <figure class="timeline-video">
-          <video controls playsinline preload="metadata" aria-label="Traditional wedding invitation video">
-            <source src={`${assetBase}/traditional-wedding-invitation.mp4`} type="video/mp4" />
+          <video controls playsinline preload="metadata" aria-label="Wedding announcement reel">
+            <source src={`${assetBase}/wedding-announcement-reel.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
-          <figcaption>Our wedding invitation</figcaption>
+          <figcaption>Wedding announcement</figcaption>
         </figure>
       </article>
     </li>
@@ -93,69 +84,81 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
 </section>
 
 <script>
-  const boards = document.querySelectorAll<HTMLElement>('[data-puzzle-board]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-scratch-card]');
 
-  boards.forEach((board) => {
-    const puzzle = board.closest<HTMLElement>('[data-date-puzzle]');
-    const hint = puzzle?.querySelector<HTMLElement>('[data-puzzle-hint]');
-    const date = puzzle?.querySelector<HTMLElement>('[data-puzzle-date]');
-    const pieces = Array.from(board.querySelectorAll<HTMLButtonElement>('[data-puzzle-piece]'));
-    if (!puzzle || !date || pieces.length !== 9) return;
+  cards.forEach((card) => {
+    const canvas = card.querySelector<HTMLCanvasElement>('[data-scratch-cover]');
+    const revealButton = card.parentElement?.querySelector<HTMLButtonElement>('[data-scratch-reveal]');
+    const hint = card.parentElement?.querySelector<HTMLElement>('[data-scratch-hint]');
+    const context = canvas?.getContext('2d', { willReadFrequently: true });
+    if (!canvas || !context || !revealButton) return;
 
-    for (let index = pieces.length - 1; index > 0; index--) {
-      const swapIndex = Math.floor(Math.random() * (index + 1));
-      [pieces[index], pieces[swapIndex]] = [pieces[swapIndex], pieces[index]];
-    }
-    if (pieces.every((piece, index) => Number(piece.dataset.puzzlePiece) === index + 1)) {
-      [pieces[0], pieces[1]] = [pieces[1], pieces[0]];
-    }
-    pieces.forEach((piece) => board.append(piece));
+    const brush = context;
+    let scratching = false;
+    let completed = false;
 
-    let selected: HTMLButtonElement | undefined;
-
-    const updatePositions = () => {
-      pieces.forEach((piece, index) => {
-        piece.setAttribute('aria-label', `Position ${index + 1}, piece ${piece.dataset.puzzlePiece}`);
-      });
+    const resizeCover = () => {
+      const bounds = card.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(bounds.width * ratio);
+      canvas.height = Math.round(bounds.height * ratio);
+      brush.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const gradient = brush.createLinearGradient(0, 0, bounds.width, bounds.height);
+      gradient.addColorStop(0, '#f5d9a9');
+      gradient.addColorStop(0.5, '#e8bc78');
+      gradient.addColorStop(1, '#f2d19a');
+      brush.globalCompositeOperation = 'source-over';
+      brush.fillStyle = gradient;
+      brush.fillRect(0, 0, bounds.width, bounds.height);
+      brush.fillStyle = 'rgba(125, 61, 35, 0.78)';
+      brush.font = '600 13px Manrope, sans-serif';
+      brush.textAlign = 'center';
+      brush.textBaseline = 'middle';
+      brush.fillText('✧  SCRATCH TO REVEAL  ✧', bounds.width / 2, bounds.height / 2);
+      brush.globalCompositeOperation = 'destination-out';
     };
 
-    const checkSolved = () => {
-      const solved = pieces.every((piece, index) => Number(piece.dataset.puzzlePiece) === index + 1);
-      if (solved) {
-        puzzle.classList.add('is-solved');
-        if (hint) hint.textContent = 'You solved it!';
-        pieces.forEach((piece) => { piece.disabled = true; });
-        date.hidden = false;
+    const reveal = () => {
+      completed = true;
+      card.classList.add('is-revealed');
+      hint?.setAttribute('hidden', '');
+    };
+
+    const eraseAt = (event: PointerEvent) => {
+      const bounds = canvas.getBoundingClientRect();
+      brush.beginPath();
+      brush.arc(event.clientX - bounds.left, event.clientY - bounds.top, 24, 0, Math.PI * 2);
+      brush.fill();
+    };
+
+    const checkProgress = () => {
+      const pixels = brush.getImageData(0, 0, canvas.width, canvas.height).data;
+      let clearPixels = 0;
+      const stride = 4 * 16;
+      for (let index = 3; index < pixels.length; index += stride) {
+        if (pixels[index] < 32) clearPixels++;
       }
+      if (clearPixels / (pixels.length / stride) > 0.38) reveal();
     };
 
-    pieces.forEach((piece) => {
-      piece.addEventListener('click', () => {
-        if (!selected) {
-          selected = piece;
-          piece.classList.add('is-selected');
-          piece.setAttribute('aria-pressed', 'true');
-          return;
-        }
-        if (selected === piece) {
-          selected.classList.remove('is-selected');
-          selected.setAttribute('aria-pressed', 'false');
-          selected = undefined;
-          return;
-        }
-
-        const firstIndex = pieces.indexOf(selected);
-        const secondIndex = pieces.indexOf(piece);
-        [pieces[firstIndex], pieces[secondIndex]] = [pieces[secondIndex], pieces[firstIndex]];
-        pieces.forEach((item) => board.append(item));
-        selected.classList.remove('is-selected');
-        selected.setAttribute('aria-pressed', 'false');
-        selected = undefined;
-        updatePositions();
-        checkSolved();
-      });
+    canvas.addEventListener('pointerdown', (event) => {
+      if (completed) return;
+      scratching = true;
+      canvas.setPointerCapture(event.pointerId);
+      eraseAt(event);
     });
-
-    updatePositions();
+    canvas.addEventListener('pointermove', (event) => {
+      if (!scratching || completed) return;
+      eraseAt(event);
+    });
+    canvas.addEventListener('pointerup', () => {
+      if (!scratching || completed) return;
+      scratching = false;
+      checkProgress();
+    });
+    canvas.addEventListener('pointercancel', () => { scratching = false; });
+    revealButton.addEventListener('click', reveal);
+    resizeCover();
+    new ResizeObserver(resizeCover).observe(card);
   });
 </script>

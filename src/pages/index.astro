@@ -10,9 +10,9 @@ import ThemePicker from '../components/ThemePicker.astro';
 
 <WeddingLayout view="public">
   <ThemePicker />
-  <Hero />
+  <Hero showDateLocation={false} />
   <CelebrationTimeline />
-  <RsvpSection />
+  <RsvpSection couplePhoto />
   <InfoSections>
     <UpdatesBoard slot="updates" />
   </InfoSections>

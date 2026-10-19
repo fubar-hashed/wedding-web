@@ -369,74 +369,40 @@ h3 {
   margin-bottom: 0.35rem;
 }
 
-.date-puzzle {
+.save-date-solo {
+  grid-template-columns: 1fr;
+}
+
+.save-date-copy {
+  margin-inline: auto;
+  max-width: 40rem;
+  width: 100%;
+}
+
+.scratch-card {
   border: 1px solid color-mix(in srgb, var(--color-accent-dark) 35%, transparent);
   border-radius: 0.75rem;
   box-shadow: 0 0.5rem 1.25rem rgb(67 40 23 / 14%);
   margin-top: 1.25rem;
-  max-width: 24rem;
-  padding: 0.85rem;
+  min-height: 9rem;
+  overflow: hidden;
+  position: relative;
 }
 
-.puzzle-board {
-  display: grid;
-  gap: 0.45rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.puzzle-piece {
-  aspect-ratio: 1;
-  background: linear-gradient(145deg, #f5d9a9, #e8bc78);
-  border: 1px solid color-mix(in srgb, var(--color-accent-dark) 35%, transparent);
-  border-radius: 0.45rem;
-  color: var(--color-accent-dark);
-  cursor: pointer;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  font-weight: 700;
-  transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
-}
-
-.puzzle-piece:hover:not(:disabled) {
-  box-shadow: 0 0.25rem 0.8rem rgb(67 40 23 / 17%);
-  transform: translateY(-2px);
-}
-
-.puzzle-piece.is-selected {
-  background: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-paper), 0 0 0 5px var(--color-accent);
-  color: #fffaf3;
-}
-
-.puzzle-piece:focus-visible {
-  outline: 3px solid var(--color-accent-dark);
-  outline-offset: 3px;
-}
-
-.puzzle-piece:disabled {
-  cursor: default;
-}
-
-.puzzle-hint {
-  color: var(--color-muted);
-  font-size: 0.8rem;
-  line-height: 1.45;
-  margin: 0.75rem 0 0.25rem;
-}
-
-.puzzle-date {
+.scratch-date {
   align-items: center;
-  background: var(--color-paper);
-  border: 1px solid var(--color-line);
-  border-radius: 0.5rem;
+  background:
+    radial-gradient(circle at 1rem 1rem, var(--color-soft-accent) 0 2px, transparent 3px),
+    var(--color-paper);
   display: flex;
   flex-direction: column;
-  margin: 0.75rem 0 0;
-  padding: 0.85rem 0.5rem;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
   text-align: center;
 }
 
-.puzzle-date span {
+.scratch-date span {
   color: var(--color-muted);
   font-size: 0.7rem;
   font-weight: 700;
@@ -444,12 +410,37 @@ h3 {
   text-transform: uppercase;
 }
 
-.puzzle-date time {
+.scratch-date time {
   color: var(--color-accent-dark);
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 600;
   line-height: 1.05;
+}
+
+.scratch-cover {
+  cursor: crosshair;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  touch-action: none;
+  transition: opacity 500ms ease;
+  width: 100%;
+}
+
+.scratch-card.is-revealed .scratch-cover {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scratch-reveal {
+  margin-top: 0.8rem;
+}
+
+.scratch-hint {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
 }
 
 .save-date-reel,
@@ -548,9 +539,9 @@ h3 {
 
 .timeline-image {
   display: block;
-  max-height: 34rem;
-  object-fit: cover;
-  object-position: center 44%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
   width: 100%;
 }
 
@@ -676,6 +667,31 @@ h3 {
 
 [data-theme='contemporary-festive'] .rsvp-section {
   background: linear-gradient(135deg, rgb(247 217 183 / 42%), transparent 55%);
+}
+
+.rsvp-with-photo {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 7vw, 5rem);
+  grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.7fr);
+  text-align: left;
+}
+
+.rsvp-with-photo .rsvp-copy {
+  justify-self: center;
+  max-width: 40rem;
+  width: 100%;
+}
+
+.rsvp-with-photo .rsvp-copy p:not(.eyebrow):not(.form-note) {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.rsvp-photo-frame {
+  justify-self: center;
+  max-width: 22rem;
+  transform: rotate(-1.5deg);
 }
 
 /* Earthy handcrafted: tactile, warm, and artisanal. */
@@ -1045,6 +1061,20 @@ h3 {
     max-width: 19rem;
   }
 
+  .rsvp-with-photo {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .rsvp-with-photo .rsvp-copy p:not(.eyebrow):not(.form-note) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .rsvp-photo-frame {
+    max-width: 18rem;
+  }
+
   .hero-copy-block .hero-rule {
     margin-left: auto;
     margin-right: auto;
@@ -1122,7 +1152,7 @@ h3 {
   }
 
   .button,
-  .puzzle-piece {
+  .scratch-cover {
     transition: none;
   }
 }

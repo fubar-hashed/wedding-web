@@ -1,15 +1,30 @@
 ---
 import { siteConfig } from '../config/site';
+
+interface Props {
+  couplePhoto?: boolean;
+}
+
+const { couplePhoto = false } = Astro.props;
+const couplePhotoUrl = `${import.meta.env.BASE_URL}/assets/couple/aayush-and-dewanshi.webp`.replace(/\/+/g, '/');
 ---
 
-<section class="rsvp-section section-shell" id="rsvp" aria-labelledby="rsvp-title">
-  <p class="eyebrow">A little note from us</p>
-  <h2 id="rsvp-title">Your presence is our gift.</h2>
-  <p>
-    Please let us know if you will be joining us so we can look forward to celebrating with you.
-  </p>
-  <a class="button button-primary" href={siteConfig.rsvpUrl} target="_blank" rel="noreferrer">
-    {siteConfig.rsvpLabel}
-  </a>
-  <p class="form-note">The RSVP form link will be updated here shortly.</p>
+<section class:list={["rsvp-section", "section-shell", { "rsvp-with-photo": couplePhoto }]} id="rsvp" aria-labelledby="rsvp-title">
+  <div class="rsvp-copy">
+    <p class="eyebrow">A little note from us</p>
+    <h2 id="rsvp-title">Your presence is our gift.</h2>
+    <p>
+      Please let us know if you will be joining us so we can look forward to celebrating with you.
+    </p>
+    <a class="button button-primary" href={siteConfig.rsvpUrl} target="_blank" rel="noreferrer">
+      {siteConfig.rsvpLabel}
+    </a>
+    <p class="form-note">The RSVP form link will be updated here shortly.</p>
+  </div>
+  {couplePhoto && (
+    <figure class="rsvp-photo-frame hero-photo-frame">
+      <img src={couplePhotoUrl} alt="Aayush and Dewanshi together" loading="lazy" />
+      <figcaption>Aayush and Dewanshi</figcaption>
+    </figure>
+  )}
 </section>
