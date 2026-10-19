@@ -15,7 +15,7 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
       <div class="scratch-card" data-scratch-card>
         <div class="scratch-date" aria-live="polite">
           <span>Save the date</span>
-          <time datetime="2027-01-27">27 January 2027</time>
+          <time datetime="2027-01-27"><span>27th</span><span>January</span></time>
         </div>
         <canvas class="scratch-cover" data-scratch-cover aria-hidden="true"></canvas>
       </div>
@@ -48,7 +48,7 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
       <span class="timeline-marker" aria-hidden="true">02</span>
       <article class="timeline-card">
         <figure class="timeline-video timeline-video-haldi timeline-media">
-          <video controls playsinline muted preload="metadata" aria-label="Haldi invitation video">
+          <video playsinline muted loop preload="metadata" aria-label="Haldi invitation video">
             <source src={`${assetBase}/traditional-wedding-invitation.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
@@ -72,7 +72,7 @@ const assetBase = `${import.meta.env.BASE_URL}/assets/invitations`.replace(/\/+/
           <p class="event-detail"><span>Attire</span>Festive formal</p>
         </div>
         <figure class="timeline-video timeline-video-wedding timeline-media">
-          <video controls playsinline muted preload="metadata" aria-label="Wedding announcement reel">
+          <video playsinline muted loop preload="metadata" aria-label="Wedding announcement reel">
             <source src={`${assetBase}/wedding-announcement-reel.mp4`} type="video/mp4" />
             Your browser does not support video playback.
           </video>
